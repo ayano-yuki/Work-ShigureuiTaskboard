@@ -27,5 +27,8 @@
     "host_permissions": [
       "https://*/*"
     ]
+  },
+  "plasmo": {
+    "newtab": "newtab"
   }
 }
