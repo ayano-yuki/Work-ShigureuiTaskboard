@@ -1,4 +1,3 @@
-// newtab.tsx
 import React from "react"
 
 function NewTab() {
