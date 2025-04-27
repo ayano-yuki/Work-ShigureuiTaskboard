@@ -1,5 +1,6 @@
 // newtab.tsx
 import React from "react"
+import "./main.css"
 
 function NewTab() {
   return (
