@@ -1,4 +1,3 @@
-// newtab.tsx
 import React from "react"
 import bgImage from "data-base64:~assets/bg.png"
 import batteryImage from "data-base64:~assets/battery.png"
