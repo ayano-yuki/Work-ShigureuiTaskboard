@@ -8,5 +8,12 @@ pnpm dev
 ```
 
 # 参考
+## 技術
 - [ブラウザ拡張機能を作るためのReactフレームワーク『Plasmo』](https://zenn.dev/nado1001/articles/plasmo-browser-extension)
 - [入門者は基礎からしっかり理解Next.jsの基本(React)](https://reffect.co.jp/react/next-js)
+- [ブラウザ拡張機能を作るためのReactフレームワーク『Plasmo』](https://zenn.dev/nado1001/articles/plasmo-browser-extension)
+- [Browser Extension Pages – Plasmo](https://docs.plasmo.com/framework/ext-pages#adding-a-popup-page)
+- [CSSのmarginとは？paddingとは？余白の指定方法まとめ](https://saruwakakun.com/html-css/basic/margin-padding)
+
+## デザイン
+- [Uindow OS(LeirosSkyly作)](https://leiros.cloudfree.jp/uios/uios.html)
