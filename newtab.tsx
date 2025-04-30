@@ -1,4 +1,6 @@
-import React from "react"
+import React, { useState } from "react"
+import BaseWindow from "./BaseWindow"
+
 import bgImage from "data-base64:~assets/bg.png"
 import batteryImage from "data-base64:~assets/battery.png"
 import imeImage from "data-base64:~assets/ime.png"
@@ -6,6 +8,8 @@ import wifiImage from "data-base64:~assets/wifi.png"
 import "./main.css"
 
 function NewTab() {
+    const [text, setText] = useState("")
+
     return (
         <div className="container">
             <div className="scrolling-wrapper">
@@ -31,6 +35,10 @@ function NewTab() {
                     <p></p>
                 </div>
             </div>
+
+            <BaseWindow title="Test Window">
+                this is test
+            </BaseWindow>
 
         </div>
     )

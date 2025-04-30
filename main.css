@@ -2,6 +2,7 @@
   --color_red: #ff7c87;
   --color_black: #8A7F78;
   --color_white: #FFF0ED;
+  --color_blue: #7B97F6;
 
   --num_gap: 0.7em;
 }
@@ -29,15 +30,16 @@
   background-repeat: repeat;
   background-size: cover;
   background-position: top;
-  animation: scroll-up 100s linear infinite;
+  animation: scroll-up-down 55s ease-in-out infinite alternate;
+  /* animation: scroll-up-down 55s infinite alternate; */
 }
 
-@keyframes scroll-up {
+@keyframes scroll-up-down {
   from {
-    transform: translateY(0);
+    transform: translateY(20);
   }
   to {
-    transform: translateY(-40%);
+    transform: translateY(-50%);
   }
 }
 
