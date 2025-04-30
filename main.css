@@ -29,10 +29,10 @@
   background-repeat: repeat;
   background-size: cover;
   background-position: top;
-  animation: scroll-up 100s linear infinite;
+  animation: scroll-up-down 100s ease-in-out infinite alternate;
 }
 
-@keyframes scroll-up {
+@keyframes scroll-up-down {
   from {
     transform: translateY(0);
   }
