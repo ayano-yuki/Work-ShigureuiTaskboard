@@ -80,7 +80,7 @@ const BaseWindow = ({
                 <div style={{ width: "36px" }} />
             </div>
 
-            <div style={{ padding: "12px", fontSize: "14px", fontWeight: "bold", flexGrow: 1, overflow: "auto" }}>
+            <div style={{ padding: "12px", fontSize: "14px", fontWeight: "bold", flexGrow: 1, overflow: "note" }}>
                 {children}
             </div>
         </Rnd>
