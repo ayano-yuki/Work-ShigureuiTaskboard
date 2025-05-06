@@ -49,7 +49,8 @@ function MemoWindow({ onClose, zIndex }: Props) {
                     border: "none",
                     padding: "0.5rem",
                     fontSize: "14px",
-                    fontWeight: "bold"
+                    fontWeight: "bold",
+                    lineHeight: "1.4"
                 }}
                 spellCheck={false}
             />

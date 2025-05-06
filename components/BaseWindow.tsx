@@ -94,9 +94,9 @@ const BaseWindow = ({
                 }}
             >
                 <div style={{ display: "flex", gap: "6px" }}>
-                    <span onClick={handleClose} style={buttonStyle("red")} />
-                    <span onClick={handleMinimize} style={buttonStyle("gold")} />
-                    <span onClick={handleMaximize} style={buttonStyle("green")} />
+                    <span onClick={handleClose} style={buttonStyle("var(--color_red)")} />
+                    <span onClick={handleMinimize} style={buttonStyle("var(--colotr_yellow)")} />
+                    <span onClick={handleMaximize} style={buttonStyle("var(--color_green)")} />
                 </div>
                 <span style={{ fontSize: "14px", fontWeight: "bold", color: "var(--color_white)" }}>{title}</span>
                 <div style={{ width: "36px" }} />
