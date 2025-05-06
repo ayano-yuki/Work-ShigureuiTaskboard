@@ -1,22 +1,50 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { Rnd } from "react-rnd"
 
 import "~/main.css"
+
+type BaseWindowProps = {
+    title?: string
+    defaultPosition?: { x: number; y: number }
+    defaultSize?: { width: number; height: number }
+    visible?: boolean
+    onClose?: () => void
+    onMinimize?: () => void
+    children: React.ReactNode
+    zIndex?: number
+}
 
 const BaseWindow = ({
     title = "Window",
     defaultPosition = { x: 100, y: 100 },
     defaultSize = { width: 500, height: 300 },
+    visible: propVisible = true,
+    onClose = () => {},
+    onMinimize = () => {},
     children,
-}) => {
-    const [visible, setVisible] = useState(true)
+    zIndex = 10,
+}: BaseWindowProps) => {
+    const [visible, setVisible] = useState(propVisible)
     const [isMaximized, setIsMaximized] = useState(false)
     const [position, setPosition] = useState(defaultPosition)
     const [size, setSize] = useState(defaultSize)
 
+    // propのvisibleが変わったら内部stateに反映
+    useEffect(() => {
+        setVisible(propVisible)
+    }, [propVisible])
+
     if (!visible) return null
 
-    const handleMinimize = () => setVisible(false)
+    const handleMinimize = () => {
+        setVisible(false)
+        onMinimize()
+    }
+
+    const handleClose = () => {
+        setVisible(false)
+        onClose()
+    }
 
     const handleMaximize = () => {
         if (isMaximized) {
@@ -28,11 +56,6 @@ const BaseWindow = ({
             setPosition({ x: 0, y: 0 })
             setIsMaximized(true)
         }
-    }
-
-    const handleClose = () => {
-        // 完全に削除したいなら null return、あるいは親から削除する
-        setVisible(false)
     }
 
     return (
@@ -54,7 +77,7 @@ const BaseWindow = ({
                 background: "var(--color_white)",
                 borderRadius: "10px",
                 overflow: "hidden",
-                zIndex: 10,
+                zIndex: zIndex,
                 display: "flex",
                 flexDirection: "column",
                 boxShadow: "8px 8px 8px rgba(0, 0.2, 0, 0.2)"
@@ -70,7 +93,6 @@ const BaseWindow = ({
                     justifyContent: "space-between",
                 }}
             >
-                {/* コントロールボタン */}
                 <div style={{ display: "flex", gap: "6px" }}>
                     <span onClick={handleClose} style={buttonStyle("red")} />
                     <span onClick={handleMinimize} style={buttonStyle("gold")} />
@@ -80,15 +102,16 @@ const BaseWindow = ({
                 <div style={{ width: "36px" }} />
             </div>
 
-            <div style={{ padding: "12px", fontSize: "14px", fontWeight: "bold", flexGrow: 1, overflow: "note" }}>
+            <div style={{ padding: "12px", fontSize: "14px", fontWeight: "bold", flexGrow: 1, overflow: "none" }}>
                 {children}
             </div>
         </Rnd>
     )
 }
 
+
 // 各ボタンのスタイルを共通化
-const buttonStyle = (color) => ({
+const buttonStyle = (color: string) => ({
     width: "12px",
     height: "12px",
     borderRadius: "50%",
