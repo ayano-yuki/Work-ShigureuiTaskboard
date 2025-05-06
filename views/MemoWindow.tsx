@@ -3,7 +3,12 @@ import React, { useRef, useEffect } from "react"
 import BaseWindow from "~/components/BaseWindow"
 import "~/main.css"
 
-function MemoWindow() {
+type Props = {
+    onClose: () => void
+    zIndex: number
+}
+
+function MemoWindow({ onClose, zIndex }: Props) {
     const memoRef = useRef(null)
 
     useEffect(() => {
@@ -24,7 +29,13 @@ function MemoWindow() {
     }
 
     return (
-        <BaseWindow title="Memo">
+        <BaseWindow
+            title="Memo"
+            defaultPosition={{ x: 400, y: 100 }}
+            defaultSize={{ width: 500, height: 300 }}
+            onClose={onClose}
+            zIndex={zIndex}
+        >
             <textarea
                 ref={memoRef}
                 onChange={handleChange}
