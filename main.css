@@ -1,0 +1,25 @@
+:root {
+    --color_red: #ff7c87;
+    --color_black: #8A7F78;
+    --color_white: #FFF0ED;
+    --color_blue: #7B97F6;
+
+    --num_gap: 0.7em;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: var(--color_black);
+}
+
+.container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    font-family: sans-serif;
+    background-color: var(--color_red);
+}
+
