@@ -3,31 +3,32 @@ import React, { useState } from "react"
 import Background from "~/views/Background"
 import YoutubeWindow from "~/views/YoutubeWindow"
 import MemoWindow from "~/views/MemoWindow"
+import TaskWindow from "~/views/TaskWindow"
 import "./main.css"
 
 function NewTab() {
     const [windows, setWindows] = useState({
         memo: false,
         youtube: false,
+        task: false,
     });
 
     const [zIndexes, setZIndexes] = useState({
         memo: 1,
         youtube: 2,
+        task: 3,
     });
 
-    const handleOpenWindow = (windowName: "memo" | "youtube") => {
-        // 最前面のzIndexを設定する
+    const handleOpenWindow = (windowName: "memo" | "youtube" | "task") => {
         setZIndexes((prevZIndexes) => {
             const maxZIndex = Math.max(prevZIndexes.memo, prevZIndexes.youtube);
             
             return {
                 ...prevZIndexes,
-                [windowName]: maxZIndex + 1,  // 新しいウィンドウのzIndexを設定
+                [windowName]: maxZIndex + 1,
             };
         });
     
-        // ウィンドウを表示
         setWindows((prev) => ({
             ...prev,
             [windowName]: true,
@@ -42,6 +43,7 @@ function NewTab() {
             <div style={iconBarStyle}>
                 <button style={squareButtonStyle} onClick={() => handleOpenWindow("memo")}>Memo</button>
                 <button style={squareButtonStyle} onClick={() => handleOpenWindow("youtube")}>YouTube</button>
+                <button style={squareButtonStyle} onClick={() => handleOpenWindow("task")}>Task</button>
             </div>
 
             {/* ウィンドウ */}
@@ -49,6 +51,13 @@ function NewTab() {
                 <MemoWindow
                     onClose={() => setWindows((prev) => ({ ...prev, memo: false }))}
                     zIndex={zIndexes.memo}
+                />
+            )}
+
+            {windows.task && (
+                <TaskWindow
+                    onClose={() => setWindows((prev) => ({ ...prev, task: false }))}
+                    zIndex={zIndexes.task}
                 />
             )}
 
@@ -69,7 +78,7 @@ const iconBarStyle: React.CSSProperties = {
     display: "flex",
     flexDirection: "column",
     gap: "30px",
-    zIndex: 1000,
+    zIndex: 0,
 }
 
 const squareButtonStyle: React.CSSProperties = {
