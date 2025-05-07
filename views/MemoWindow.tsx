@@ -9,23 +9,26 @@ type Props = {
 }
 
 function MemoWindow({ onClose, zIndex }: Props) {
-    const memoRef = useRef(null)
+    const memoRef = useRef<HTMLTextAreaElement>(null)
 
     useEffect(() => {
-        const savedMemo = localStorage.getItem('memoContent')
-        if (savedMemo) {
+        const savedMemo = localStorage.getItem("memoContent")
+        if (savedMemo && memoRef.current) {
             memoRef.current.value = savedMemo
         }
     }, [])
 
     const handleChange = () => {
-        const memoContent = memoRef.current.value
-        localStorage.setItem('memoContent', memoContent)
+        if (memoRef.current) {
+            localStorage.setItem("memoContent", memoRef.current.value)
+        }
     }
 
     const handleDelete = () => {
-        localStorage.removeItem('memoContent') 
-        memoRef.current.value = ""
+        localStorage.removeItem("memoContent")
+        if (memoRef.current) {
+            memoRef.current.value = ""
+        }
     }
 
     return (
@@ -39,8 +42,6 @@ function MemoWindow({ onClose, zIndex }: Props) {
             <textarea
                 ref={memoRef}
                 onChange={handleChange}
-                contentEditable
-                suppressContentEditableWarning={true}
                 style={{
                     background: "var(--color_white)",
                     width: "100%",
@@ -50,7 +51,8 @@ function MemoWindow({ onClose, zIndex }: Props) {
                     padding: "0.5rem",
                     fontSize: "14px",
                     fontWeight: "bold",
-                    lineHeight: "1.4"
+                    lineHeight: "1.4",
+                    resize: "none"
                 }}
                 spellCheck={false}
             />

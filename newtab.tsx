@@ -1,74 +1,76 @@
-import React, { useState } from "react"
+import React, { useState } from "react";
+import Background from "~/views/Background";
+import YoutubeWindow from "~/views/YoutubeWindow";
+import MemoWindow from "~/views/MemoWindow";
+import TaskWindow from "~/views/TaskWindow";
+import "./main.css";
 
-import Background from "~/views/Background"
-import YoutubeWindow from "~/views/YoutubeWindow"
-import MemoWindow from "~/views/MemoWindow"
-import TaskWindow from "~/views/TaskWindow"
-import "./main.css"
+type WindowName = "memo" | "youtube" | "task";
 
 function NewTab() {
-    const [windows, setWindows] = useState({
+    const [windows, setWindows] = useState<Record<WindowName, boolean>>({
         memo: false,
         youtube: false,
         task: false,
     });
 
-    const [zIndexes, setZIndexes] = useState({
+    const [zIndexes, setZIndexes] = useState<Record<WindowName, number>>({
         memo: 1,
         youtube: 2,
         task: 3,
     });
 
-    const handleOpenWindow = (windowName: "memo" | "youtube" | "task") => {
-        setZIndexes((prevZIndexes) => {
-            const maxZIndex = Math.max(prevZIndexes.memo, prevZIndexes.youtube);
-            
-            return {
-                ...prevZIndexes,
-                [windowName]: maxZIndex + 1,
-            };
+    const handleToggleWindow = (windowName: WindowName) => {
+        setZIndexes((prev) => {
+            const maxZ = Math.max(...Object.values(prev));
+            return { ...prev, [windowName]: maxZ + 1 };
         });
-    
+
         setWindows((prev) => ({
             ...prev,
-            [windowName]: true,
+            [windowName]: !prev[windowName],
         }));
+    };
+
+    const handleCloseWindow = (windowName: WindowName) => {
+        setWindows((prev) => ({ ...prev, [windowName]: false }));
+    };
+
+    const renderWindow = (name: WindowName) => {
+        const props = {
+            onClose: () => handleCloseWindow(name),
+            zIndex: zIndexes[name],
+        };
+
+        if (!windows[name]) return null;
+
+        switch (name) {
+            case "memo":
+                return <MemoWindow {...props} />;
+            case "youtube":
+                return <YoutubeWindow {...props} />;
+            case "task":
+                return <TaskWindow {...props} />;
+        }
     };
 
     return (
         <div className="container">
             <Background />
 
-            {/* アイコン */}
+            {/* アイコンバー */}
             <div style={iconBarStyle}>
-                <button style={squareButtonStyle} onClick={() => handleOpenWindow("memo")}>Memo</button>
-                <button style={squareButtonStyle} onClick={() => handleOpenWindow("youtube")}>YouTube</button>
-                <button style={squareButtonStyle} onClick={() => handleOpenWindow("task")}>Task</button>
+                <button style={squareButtonStyle} onClick={() => handleToggleWindow("memo")}>Memo</button>
+                <button style={squareButtonStyle} onClick={() => handleToggleWindow("youtube")}>YouTube</button>
+                <button style={squareButtonStyle} onClick={() => handleToggleWindow("task")}>Task</button>
             </div>
 
-            {/* ウィンドウ */}
-            {windows.memo && (
-                <MemoWindow
-                    onClose={() => setWindows((prev) => ({ ...prev, memo: false }))}
-                    zIndex={zIndexes.memo}
-                />
-            )}
-
-            {windows.task && (
-                <TaskWindow
-                    onClose={() => setWindows((prev) => ({ ...prev, task: false }))}
-                    zIndex={zIndexes.task}
-                />
-            )}
-
-            {windows.youtube && (
-                <YoutubeWindow
-                    onClose={() => setWindows((prev) => ({ ...prev, youtube: false }))}
-                    zIndex={zIndexes.youtube}
-                />
-            )}
+            {/* 各ウィンドウ */}
+            {renderWindow("memo")}
+            {renderWindow("youtube")}
+            {renderWindow("task")}
         </div>
-    )
+    );
 }
 
 const iconBarStyle: React.CSSProperties = {
@@ -79,7 +81,7 @@ const iconBarStyle: React.CSSProperties = {
     flexDirection: "column",
     gap: "30px",
     zIndex: 0,
-}
+};
 
 const squareButtonStyle: React.CSSProperties = {
     width: "80px",
@@ -90,6 +92,6 @@ const squareButtonStyle: React.CSSProperties = {
     borderRadius: "8px",
     fontWeight: "bold",
     cursor: "pointer",
-}
+};
 
-export default NewTab
+export default NewTab;
