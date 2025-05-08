@@ -1,8 +1,8 @@
 {
   "name": "shigureui-taskboard",
-  "displayName": "Shigureui taskboard",
+  "displayName": "Shigureui Taskboard",
   "version": "0.0.1",
-  "description": "しぐれういの配信画面風なタスク管理用Chrome拡張機能",
+  "description": "しぐれういの配信画面風なタスク管理ができるChrome拡張機能",
   "author": "ayano yukizakura",
   "scripts": {
     "dev": "plasmo dev",
@@ -10,7 +10,6 @@
     "package": "plasmo package"
   },
   "dependencies": {
-    "marked": "^15.0.11",
     "plasmo": "0.90.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",

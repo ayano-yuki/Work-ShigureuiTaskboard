@@ -1,5 +1,6 @@
 @import '~/main.css';
 
+/* スクロール背景アニメーション */
 .scrolling-bg {
     position: absolute;
     width: 100%;
@@ -8,43 +9,45 @@
     background-size: cover;
     background-position: top;
     animation: scroll-up-down 40s ease-in-out infinite alternate;
-    /* animation: scroll-up-down 55s infinite alternate; */
 }
 
 @keyframes scroll-up-down {
     from {
-        transform: translateY(20);
+        transform: translateY(20px);
     }
     to {
         transform: translateY(-50%);
     }
 }
 
+/* メニューバー */
 .menu-bar {
     position: fixed;
-    background-color: var(--color_white);
     width: 100%;
     height: 1.5rem;
+    background-color: var(--color_white);
     font-size: small;
     font-weight: bold;
     display: flex;
     z-index: 1;
 }
 
-.left-menu{
+/* 左側メニュー */
+.left-menu {
     display: flex;
     margin: 0 var(--num_gap);
 }
 
 .left-menu div,
-.left-menu svg{
+.left-menu svg {
     margin: 0 var(--num_gap);
 }
 
+/* 右側アイコン */
 .right-icons {
+    display: flex;
     margin-left: auto;
     margin-right: var(--num_gap);
-    display: flex;
 }
 
 .right-icons img {
