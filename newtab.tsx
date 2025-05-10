@@ -5,6 +5,10 @@ import MemoWindow from "~/views/MemoWindow";
 import TaskWindow from "~/views/TaskWindow";
 import "./main.css";
 
+import MemoIcon from "data-base64:~/assets/memo.png";
+import YoutubeIcon from "data-base64:~/assets/youtube.png";
+import TaskIcon from "data-base64:~/assets/task.png";
+
 type WindowName = "memo" | "youtube" | "task";
 
 function NewTab() {
@@ -40,6 +44,7 @@ function NewTab() {
         const props = {
             onClose: () => handleCloseWindow(name),
             zIndex: zIndexes[name],
+            windowId: name,
         };
 
         if (!windows[name]) return null;
@@ -60,9 +65,15 @@ function NewTab() {
 
             {/* アイコンバー */}
             <div style={iconBarStyle}>
-                <button style={squareButtonStyle} onClick={() => handleToggleWindow("memo")}>Memo</button>
-                <button style={squareButtonStyle} onClick={() => handleToggleWindow("youtube")}>YouTube</button>
-                <button style={squareButtonStyle} onClick={() => handleToggleWindow("task")}>Task</button>
+                <button style={squareButtonStyle} onClick={() => handleToggleWindow("memo")}>
+                    <img src={MemoIcon} alt="Memo" width={70} height={70}/>
+                </button>
+                <button style={squareButtonStyle} onClick={() => handleToggleWindow("youtube")}>
+                <img src={YoutubeIcon} alt="Youtube" width={70} height={70}/>
+                </button>
+                <button style={squareButtonStyle} onClick={() => handleToggleWindow("task")}>
+                <img src={TaskIcon} alt="Task" width={70} height={70}/>
+                </button>
             </div>
 
             {/* 各ウィンドウ */}
@@ -92,6 +103,9 @@ const squareButtonStyle: React.CSSProperties = {
     borderRadius: "8px",
     fontWeight: "bold",
     cursor: "pointer",
+    display: "flex",   
+    alignItems: "center", 
+    justifyContent: "center",
 };
 
 export default NewTab;
