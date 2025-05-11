@@ -1,0 +1,41 @@
+name: Build and Release Plasmo Extension
+
+on:
+  push:
+    tags:
+      - 'v*'  # 例: v1.0.0 のようなタグ push でトリガー
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      - name: Install pnpm
+        run: npm install -g pnpm
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build the Plasmo extension
+        run: pnpm build
+
+      - name: Zip built extension
+        run: |
+          cd build/chrome-mv3-prod
+          zip -r ../../plasmo-extension.zip .
+
+      - name: Upload to GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: plasmo-extension.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
