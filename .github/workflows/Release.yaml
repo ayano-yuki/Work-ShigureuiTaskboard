@@ -7,36 +7,42 @@ on:
 
 jobs:
   build-and-release:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04  # ubuntu-22.04を使うことで不具合が回避できる場合もある
 
     steps:
+      # リポジトリのチェックアウト
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      # Node.js のセットアップ
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '20'
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: 8  # 使っているpnpmのバージョン（8が一般的）
+      # 最新の pnpm をインストール
+      - name: Update pnpm
+        run: pnpm install -g pnpm@latest
 
-      - name: Install dependencies
-        run: pnpm install
+      # 依存関係のインストール（クリーンインストール）
+      - name: Clean and install dependencies
+        run: |
+          rm -rf node_modules .parcel-cache
+          pnpm install
 
+      # Plasmo拡張機能のビルド
       - name: Build the Plasmo extension
         run: |
           rm -rf .parcel-cache
           NODE_OPTIONS="--max-old-space-size=2048" pnpm build
 
-
+      # ビルドした拡張機能をZip化
       - name: Zip built extension
         run: |
           cd build/chrome-mv3-prod
           zip -r ../../plasmo-extension.zip .
 
+      # GitHub Release にアップロード
       - name: Upload to GitHub Release
         uses: softprops/action-gh-release@v2
         with:
