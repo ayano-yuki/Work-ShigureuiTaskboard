@@ -20,9 +20,11 @@ jobs:
         with:
           node-version: '20'
 
-      # 最新の pnpm をインストール
-      - name: Update pnpm
-        run: pnpm install -g pnpm@latest
+      # pnpm のセットアップ
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: '8'  # 必要に応じてバージョンを指定
 
       # 依存関係のインストール（クリーンインストール）
       - name: Clean and install dependencies
