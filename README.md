@@ -7,6 +7,21 @@ pnpm build
 pnpm dev
 ```
 
+# リリース
+```sh
+git tag <version>
+git push origin <version>
+```
+```sh
+git tag -d <version>
+git push origin :refs/tags/<version> 
+
+git tag <version>
+git push origin <version>
+
+```
+
+
 # 参考
 ## 技術
 - [ブラウザ拡張機能を作るためのReactフレームワーク『Plasmo』](https://zenn.dev/nado1001/articles/plasmo-browser-extension)

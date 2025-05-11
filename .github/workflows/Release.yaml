@@ -16,12 +16,12 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '20'
+          node-version: '23'
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v2
         with:
-          version: 8  # 使っているpnpmのバージョン（8が一般的）
+          version: 9  # 使っているpnpmのバージョン（8が一般的）
 
       - name: Install dependencies
         run: pnpm install
