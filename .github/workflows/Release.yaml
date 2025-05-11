@@ -29,7 +29,7 @@ jobs:
       - name: Build the Plasmo extension
         run: |
           rm -rf .parcel-cache
-          node --max-old-space-size=2048 $(pnpm bin)/plasmo build
+          NODE_OPTIONS="--max-old-space-size=2048" pnpm build
 
 
       - name: Zip built extension
