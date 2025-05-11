@@ -22,7 +22,7 @@ jobs:
       - name: Setup pnpm
         uses: pnpm/action-setup@v2
         with:
-          version: 9  # 使っているpnpmのバージョン（8が一般的）
+          version: 8  # 使っているpnpmのバージョン（8が一般的）
 
       - name: Install dependencies
         run: pnpm install
