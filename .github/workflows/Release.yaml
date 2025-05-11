@@ -3,7 +3,7 @@ name: Build and Release Plasmo Extension
 on:
   push:
     tags:
-      - 'v*'  # 例: v1.0.0 のようなタグ push でトリガー
+      - 'v*'  # v1.0.0 などのタグ push で起動
 
 jobs:
   build-and-release:
@@ -17,10 +17,11 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '20'
-          cache: 'pnpm'
 
-      - name: Install pnpm
-        run: npm install -g pnpm
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8  # 使っているpnpmのバージョン（8が一般的）
 
       - name: Install dependencies
         run: pnpm install
