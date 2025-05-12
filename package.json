@@ -1,8 +1,8 @@
 {
   "name": "shigureui-taskboard",
-  "displayName": "Shigureui Taskboard",
-  "version": "0.0.1",
-  "description": "しぐれういの配信画面風なタスク管理ができるChrome拡張機能",
+  "displayName": "Shigureui board",
+  "version": "1.0.0",
+  "description": "しぐれういの配信画面風なNewTabを表示するChrome拡張機能",
   "author": "ayano yukizakura",
   "scripts": {
     "dev": "plasmo dev",
